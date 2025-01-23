@@ -31,7 +31,7 @@ function App() {
       {!session ?
         <>
           <MLAuth />
-          <p className="description">--OR--<br />Use the following features to sign in using another platform or via traditional methods:</p>
+          <p className="description">--OR--<br /><br />Use the following features to sign in using another platform or via traditional methods:</p>
           <div className="row flex flex-center">
             <div className="col-6 form-widget">
               {/* <div class="supabase-auth-ui_ui-divider c-kbVGyA"></div> */}
