@@ -8,10 +8,16 @@ export default function MLAuth() {
 
     const handleLogin = async (event) => {
         event.preventDefault()
-
+        console.log('handleLogin, emailRedirectTo:', document.location.origin + document.location.pathname);
         setLoading(true)
-        const { error } = await supabase.auth.signInWithOtp({ email })
-
+        const { error } = await supabase.auth.signInWithOtp({
+            email: email,
+            options: {
+                // set this to false if you do not want the user to be automatically signed up
+                // shouldCreateUser: false,
+                emailRedirectTo: document.location.origin + document.location.pathname,
+            },
+        })
         if (error) {
             alert(error.error_description || error.message)
         } else {
