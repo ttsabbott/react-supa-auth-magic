@@ -1,0 +1,48 @@
+name: Upsert Supabase Profile
+
+on:
+  schedule:
+    - cron: '0 16 * * *'  # Runs daily at 9 AM MST (16:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  upsert_and_fetch_profile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Upsert profile row into Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          PROFILE_ID="7639c588-c2a1-4de6-83c3-c98f1956cc8d"
+
+          echo "Upserting profile with ID $PROFILE_ID"
+
+          curl -s -X POST "$SUPABASE_URL/rest/v1/profiles" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: resolution=merge-duplicates" \
+            -d "{
+              \"id\": \"$PROFILE_ID\",
+              \"username\": \"daily_job\",
+              \"full_name\": \"Automated Bot\",
+              \"avatar_url\": \"https://ttsabbott.com/avatar.png\",
+              \"website\": \"https://ttsabbott.com\",
+              \"updated_at\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"
+            }"
+
+      - name: Fetch the updated profile row
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          PROFILE_ID="7639c588-c2a1-4de6-83c3-c98f1956cc8d"
+
+          echo "Fetching profile for ID $PROFILE_ID..."
+
+          curl -s "$SUPABASE_URL/rest/v1/profiles?id=eq.$PROFILE_ID" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY" \
+            -H "Accept: application/json"
