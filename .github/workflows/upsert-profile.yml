@@ -13,7 +13,7 @@ jobs:
       - name: Upsert profile row into Supabase
         env:
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_SERVICE_KEY }}
         run: |
           PROFILE_ID="7639c588-c2a1-4de6-83c3-c98f1956cc8d"
 
