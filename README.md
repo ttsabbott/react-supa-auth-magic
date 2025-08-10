@@ -12,3 +12,5 @@ This project was created to learn about supbase auth and magic link.
 Supabase is an open-source alternative to Firebase. It provides a set of tools for building web and mobile applications. Magic is a passwordless authentication service that provides secure and user-friendly login experience.
 
 Tech used: React, Supabase Auth, MagicLink
+
+Last Updated: 2025-08-09
