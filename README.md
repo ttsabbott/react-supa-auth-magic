@@ -13,4 +13,4 @@ Supabase is an open-source alternative to Firebase. It provides a set of tools f
 
 Tech used: React, Supabase Auth, MagicLink
 
-Last Updated: 2025-08-09
+Last Updated: 2025-09-13
